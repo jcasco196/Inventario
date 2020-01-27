@@ -1,7 +1,5 @@
 package com.example.inventario;
 
-import android.widget.EditText;
-
 public class User {
     public String userId;
     public String displayName;

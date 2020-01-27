@@ -11,11 +11,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="-50dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
+            android:id="@+id/imagenPerfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/com_facebook_profile_picture_blank_portrait"
