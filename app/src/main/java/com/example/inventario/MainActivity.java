@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int RC_SIGN_IN = 123;
 
-    private Button btnEntra; //ok
-    private EditText etEmail; // ok
-    private EditText etPassword; // ok
-    private TextView tvRegistrarte; //ok
-    private ProgressDialog progressDialog;
-    private FirebaseAuth firebaseAuth;
+    private Button btnEntra; // Declaramos botón de entrada
+    private EditText etEmail; // Declaramos campo de texto de email
+    private EditText etPassword; // Declaramos campo de texto de contraseña
+    private TextView tvRegistrarte; // Declaramos campo vista de texto cómo botón de registro
+    private ProgressDialog progressDialog; // Declaramos barra de progreso
+    private FirebaseAuth firebaseAuth; // Declaramos variable metodo a
     final Context context = this;
 
     @Override
