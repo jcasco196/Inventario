@@ -3,13 +3,17 @@ package com.example.inventario;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,83 +35,85 @@ import java.util.UUID;
 public class Perfil extends AppCompatActivity {
 
     private ImageView imagenPerfil;
+    private Button guardar;
     private TextView nombre;
     private TextView email;
     private TextView fechaNacimiento;
-    ProgressDialog pd;
-    int PICK_IMAGE_REQUEST = 111;
-    Uri filePath;
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReferenceFromUrl("gs://inventario-561c3.appspot.com");    //change the url according to your firebase app
+    //IMAGEN
+    Uri mediaUri;
+    Uri downloaderUrl;
+    private final int RC_IMAGE_PICK = 5677;
+    protected DatabaseReference mDatabase;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
+        guardar = findViewById(R.id.guardar);
         email = findViewById(R.id.email);
         nombre = findViewById(R.id.nombre);
         imagenPerfil = findViewById(R.id.imagenPerfil);
         fechaNacimiento = findViewById(R.id.fechaNacimiento);
-        pd = new ProgressDialog(this);
-        pd.setMessage("Subiendo....");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardar.setEnabled(false);
+                if (mediaUri != null){
+                    uploadFile();
+
+                } else{
+                    Toast.makeText(getApplicationContext(),"NO PUEDES GUARDAR NADA QUE NO HAYA SIDO SELECCIONADO.",Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(new Intent(Perfil.this, Perfil.class));
+            }
+
+        });
+
         imagenPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                //intent.setAction(Intent.ACTION_PICK);
-                startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), PICK_IMAGE_REQUEST);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,RC_IMAGE_PICK);
             }
         });
+    } // FIN ONCREATE
 
-        fechaNacimiento.setOnClickListener(new View.OnClickListener() {
+    void uploadFile(){
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("imagepP/" + UUID.randomUUID());
+        fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onClick(View v) {
-                if(filePath != null) {
-                    pd.show();
-
-                    StorageReference childRef = storageRef.child("image.jpg");
-
-                    //uploading the image
-                    UploadTask uploadTask = childRef.putFile(filePath);
-
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            pd.dismiss();
-                            Toast.makeText(Perfil.this, "Subida exitosamente", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(Perfil.this, "Problema al subir -> " + e, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else {
-                    Toast.makeText(Perfil.this, "Seleccionar una imagen", Toast.LENGTH_SHORT).show();
-                }
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                downloaderUrl = taskSnapshot.getDownloadUrl();
+                subirImagen();
             }
         });
+    }
 
+    private void subirImagen() {
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(downloaderUrl == null) {
+            mDatabase.child("imagenPersonal").child(user.getUid()).setValue(new ImagenPerfil(user.getUid(), null, null, null, null));
+        } else {
+            mDatabase.child("imagenPersonal").child(user.getUid()).setValue(new ImagenPerfil(user.getUid(), null, downloaderUrl.toString(), null, null));
+        }
+        finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-
-                imagenPerfil.setImageBitmap(bitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
+        if (data != null) {
+            if (requestCode == RC_IMAGE_PICK) {
+                mediaUri = data.getData();
+                Glide.with(this).load(mediaUri).into(imagenPerfil);
             }
         }
     }
