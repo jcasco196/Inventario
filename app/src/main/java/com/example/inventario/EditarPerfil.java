@@ -50,10 +50,9 @@ public class EditarPerfil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_editar_perfil);
 
         nombre = findViewById(R.id.nombre);
-        email = findViewById(R.id.email);
         cumple = findViewById(R.id.cumple);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
