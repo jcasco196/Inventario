@@ -40,7 +40,7 @@ public class Perfil extends AppCompatActivity {
 
     private Button editarPerfil;
     private ImageView imagenPerfil;
-    private EditText nombre;
+    private TextView nombre;
     private TextView email;
     private TextView fechaNacimiento;
 
