@@ -137,7 +137,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
-        mDatabase.child("users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email));
+        mDatabase.child("users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email, null));
 
         startActivity(new Intent(Registro.this, Perfil.class));
         finish();

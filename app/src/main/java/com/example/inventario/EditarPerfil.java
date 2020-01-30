@@ -94,6 +94,7 @@ public class EditarPerfil extends AppCompatActivity {
                 if(user != null) {
                     nombre.setText(user.displayName);
                     email.setText(user.email);
+                    cumple.setText(user.cumple);
                 }
             }
             @Override
@@ -110,9 +111,9 @@ public class EditarPerfil extends AppCompatActivity {
                 if (mediaUri != null){
                     uploadFile();
 
-                } else{
-                    Toast.makeText(getApplicationContext(),"NO PUEDES GUARDAR NADA QUE NO HAYA SIDO SELECCIONADO.",Toast.LENGTH_SHORT).show();
                 }
+
+                mDatabase.child("users").child(uid).setValue(new User(uid, nombre.getText().toString(),email.getText().toString(), cumple.getText().toString()));
                 finish();
                 startActivity(new Intent(EditarPerfil.this, Perfil.class));
             }

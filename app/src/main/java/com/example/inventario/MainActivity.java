@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
                     if(user == null){
-                        databaseReference.setValue(new User(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
+                        databaseReference.setValue(new User(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail(), null));
                     }
                 }
 

@@ -87,6 +87,7 @@ public class Perfil extends AppCompatActivity {
                 if(user != null) {
                     nombre.setText(user.displayName);
                     email.setText(user.email);
+                    fechaNacimiento.setText(user.cumple);
                 }
             }
             @Override
