@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,8 +24,11 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,7 +40,9 @@ public class EditarPerfil extends AppCompatActivity {
 
     private EditText nombre;
     private EditText email;
+    private ImageView imagenPerfil;
     private TextView cumple;
+    private Button guardar;
     private Calendar calendar;
     private int year, month, day;
 
@@ -45,46 +51,81 @@ public class EditarPerfil extends AppCompatActivity {
     Uri downloaderUrl;
     private final int RC_IMAGE_PICK = 5677;
     protected DatabaseReference mDatabase;
-    final Context context = this;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
 
         nombre = findViewById(R.id.nombre);
+        email = findViewById(R.id.email);
+        imagenPerfil = findViewById(R.id.imagenPerfil);
+        guardar = findViewById(R.id.guardar);
         cumple = findViewById(R.id.cumple);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        final String uid = FirebaseAuth.getInstance().getUid();
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//
-//        guardar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                email.setEnabled(false);
-//                if (mediaUri != null){
-//                    uploadFile();
-//
-//                } else{
-//                    Toast.makeText(getApplicationContext(),"NO PUEDES GUARDAR NADA QUE NO HAYA SIDO SELECCIONADO.",Toast.LENGTH_SHORT).show();
-//                }
-//                finish();
-//                startActivity(new Intent(EditarPerfil.this, Perfil.class));
-//            }
-//
-//        });
-//
-//        imagenPerfil.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent,RC_IMAGE_PICK);
-//            }
-//        });
+        mDatabase.child("imagenPerfil").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ImagenPerfil imagen_Perfil = dataSnapshot.getValue(ImagenPerfil.class);
+                if (imagen_Perfil != null) {
+                    imagenPerfil.setVisibility(View.VISIBLE);
+                    Glide.with(getApplicationContext())
+                            .load(imagen_Perfil.imagenP2)
+                            .into(imagenPerfil);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        mDatabase.child("users").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if(user != null) {
+                    nombre.setText(user.displayName);
+                    email.setText(user.email);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
+
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email.setEnabled(false);
+                if (mediaUri != null){
+                    uploadFile();
+
+                } else{
+                    Toast.makeText(getApplicationContext(),"NO PUEDES GUARDAR NADA QUE NO HAYA SIDO SELECCIONADO.",Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(new Intent(EditarPerfil.this, Perfil.class));
+            }
+
+        });
+
+        imagenPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,RC_IMAGE_PICK);
+            }
+        });
     } // FIN ONCREATE
 
     @SuppressWarnings("deprecation")
@@ -115,36 +156,36 @@ public class EditarPerfil extends AppCompatActivity {
     }
 
 
-//    void uploadFile(){
-//        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("imagenPerfil/" + UUID.randomUUID());
-//        fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                downloaderUrl = taskSnapshot.getDownloadUrl();
-//                subirImagen();
-//            }
-//        });
-//    }
-//
-//    private void subirImagen() {
-//
-//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if(downloaderUrl == null) {
-//            mDatabase.child("imagenPerfil").child(user.getUid()).setValue(new ImagenPerfil(user.getUid(), null, null, null, null));
-//        } else {
-//            mDatabase.child("imagenPerfil").child(user.getUid()).setValue(new ImagenPerfil(user.getUid(), null, downloaderUrl.toString(), null, null));
-//        }
-//        finish();
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (data != null) {
-//            if (requestCode == RC_IMAGE_PICK) {
-//                mediaUri = data.getData();
-//                Glide.with(this).load(mediaUri).into(imagenPerfil);
-//            }
-//        }
-//    }
+    void uploadFile(){
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("imagenPerfil/" + UUID.randomUUID());
+        fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                downloaderUrl = taskSnapshot.getDownloadUrl();
+                subirImagen();
+            }
+        });
+    }
+
+    private void subirImagen() {
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(downloaderUrl == null) {
+            mDatabase.child("imagenPerfil").child(user.getUid()).setValue(new ImagenPerfil(user.getUid(), null, null, null, null));
+        } else {
+            mDatabase.child("imagenPerfil").child(user.getUid()).setValue(new ImagenPerfil(user.getUid(), null, downloaderUrl.toString(), null, null));
+        }
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if (requestCode == RC_IMAGE_PICK) {
+                mediaUri = data.getData();
+                Glide.with(this).load(mediaUri).into(imagenPerfil);
+            }
+        }
+    }
 }
