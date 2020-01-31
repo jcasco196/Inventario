@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditarPerfil"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".EditarPerfil">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="70dp"
+        android:gravity="center">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imagenPerfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/com_facebook_profile_picture_blank_portrait"
-            app:civ_border_color="#000"/>
+            app:civ_border_color="#000" />
 
     </LinearLayout>
 
@@ -31,37 +30,38 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:text="Nombre:"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="50dp"/>
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/nombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/bordes"
+            android:paddingLeft="5dp"/>
 
-            <EditText
-                android:id="@+id/nombre"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bordes"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"/>
-
-        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
             android:text="Email:"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="50dp"/>
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,25 +70,27 @@
 
         <EditText
             android:id="@+id/email"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bordes"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/bordes"
+            android:paddingLeft="5dp"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
             android:text="Fecha de Nacimiento:"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="50dp"/>
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -97,13 +99,17 @@
 
         <TextView
             android:id="@+id/cumple"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bordes"
             android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/bordes"
             android:onClick="setDate"
-            android:layout_height="30dp"/>
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -113,11 +119,11 @@
 
         <Button
             android:id="@+id/guardar"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginRight="50dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
             android:background="#00cc99"
             android:text="Guardar"
             android:textColor="@android:color/white" />
