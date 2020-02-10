@@ -1,5 +1,6 @@
 <PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <Preference
         app:key="cambioPass"
         app:title="Cambiar contraseña"
@@ -19,3 +20,4 @@
         app:summary="Información de contacto para sugerencias o cuestiones."/>
 
 </PreferenceScreen>
+
