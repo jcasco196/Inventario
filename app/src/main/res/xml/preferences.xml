@@ -1,0 +1,21 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        app:key="cambioPass"
+        app:title="Cambiar contraseña"
+        app:summary="Ajuste para el cambio de contraseña."/>
+
+    <SwitchPreferenceCompat
+        app:key="modoNoche"
+        app:title="Modo Noche"/>
+    <Preference
+        app:key="informacion"
+        app:title="Información"
+        app:summary="Información acerca de la app."/>
+
+    <Preference
+        app:key="contacto"
+        app:title="Contacto"
+        app:summary="Información de contacto para sugerencias o cuestiones."/>
+
+</PreferenceScreen>

@@ -40,6 +40,8 @@ import java.util.UUID;
 public class Perfil extends AppCompatActivity {
 
     private Button editarPerfil;
+    private Button cerrarSesion;
+    private Button ajustes;
     private ImageView imagenPerfil;
     private TextView nombre;
     private TextView email;
@@ -58,7 +60,9 @@ public class Perfil extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         imagenPerfil = findViewById(R.id.imagenPerfil);
         fechaNacimiento = findViewById(R.id.fechaNacimiento);
+        cerrarSesion = findViewById(R.id.cerrarSesion);
         editarPerfil = findViewById(R.id.editarPerfil);
+        ajustes = findViewById(R.id.ajustes);
 
         mDatabase.child("imagenPerfil").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,6 +100,8 @@ public class Perfil extends AppCompatActivity {
             }
         });
 
+
+
         editarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,8 +111,37 @@ public class Perfil extends AppCompatActivity {
             }
         });
 
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
+
+
+        ajustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(Perfil.this, SettingsActivity.class));
+            }
+        });
+
+
+
+
+
 
     } // FIN ONCREATE
 
+    public void signOut() {
+        // [START auth_sign_out]
+        FirebaseAuth.getInstance().signOut();
+        // [END auth_sign_out]
+        finish();
+        startActivity(new Intent(Perfil.this, MainActivity.class));
+
+    }
 
 }
