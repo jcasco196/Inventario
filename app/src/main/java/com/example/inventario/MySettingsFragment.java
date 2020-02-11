@@ -24,8 +24,55 @@ public class MySettingsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
 
+        Preference preference3 = findPreference("cambioPass");
+        preference3.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference2) {
+                LayoutInflater li = LayoutInflater.from(getContext());
+                View promptsView = li.inflate(R.layout.recuperar_contra, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getContext());
+
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        final String correo = userInput.getText().toString();
+                                        FirebaseAuth.getInstance().sendPasswordResetEmail(correo)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(getContext(), "Vaya a su correo para restablecer su contraseña.", Toast.LENGTH_LONG).show();
+                                                        } else {
+                                                            Toast.makeText(getContext(), "Error, correo invalido", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                })
+                        .setNegativeButton("Cancelar",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                return true;
+            }
+        });
 
 
+        ///
 
         Preference preference = findPreference("informacion");
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
