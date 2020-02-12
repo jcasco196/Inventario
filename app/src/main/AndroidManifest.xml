@@ -17,7 +17,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
-        <activity android:name=".EditarPerfil" />
+        <activity android:name=".EditarPerfil"  />
         <activity android:name=".Perfil" />
         <activity android:name=".Registro" />
         <activity android:name=".MainActivity">

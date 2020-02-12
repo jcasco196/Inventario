@@ -1,6 +1,8 @@
 package com.example.inventario;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceManager;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -68,6 +70,7 @@ public class EditarPerfil extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         final String uid = FirebaseAuth.getInstance().getUid();
+
 
         mDatabase.child("imagenPerfil").child(uid).addValueEventListener(new ValueEventListener() {
             @Override

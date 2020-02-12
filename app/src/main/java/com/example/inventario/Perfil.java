@@ -2,6 +2,9 @@ package com.example.inventario;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,6 +15,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +41,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.UUID;
 
-public class Perfil extends AppCompatActivity {
+public class Perfil extends AppCompatActivity{
 
     private Button editarPerfil;
     private Button cerrarSesion;
@@ -46,6 +50,7 @@ public class Perfil extends AppCompatActivity {
     private TextView nombre;
     private TextView email;
     private TextView fechaNacimiento;
+    AlertDialog.Builder builder;
 
     protected DatabaseReference mDatabase;
     @Override
@@ -63,6 +68,7 @@ public class Perfil extends AppCompatActivity {
         cerrarSesion = findViewById(R.id.cerrarSesion);
         editarPerfil = findViewById(R.id.editarPerfil);
         ajustes = findViewById(R.id.ajustes);
+        builder = new AlertDialog.Builder(this);
 
         mDatabase.child("imagenPerfil").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -114,7 +120,28 @@ public class Perfil extends AppCompatActivity {
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signOut();
+
+                builder.setMessage("¿Estás seguro que quieres salir?")
+                        .setCancelable(false)
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                signOut();
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                dialog.cancel();
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Cerrar sesión");
+                alert.show();
+
+
             }
         });
 
@@ -127,10 +154,6 @@ public class Perfil extends AppCompatActivity {
                 startActivity(new Intent(Perfil.this, SettingsActivity.class));
             }
         });
-
-
-
-
 
 
     } // FIN ONCREATE
