@@ -62,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NOMBRE DEL USUARIO"
+            style="@style/AppTheme"
             android:textSize="20sp"/>
     </LinearLayout>
 
@@ -76,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EMAIL DEL USUARIO"
-            android:textColor="@android:color/black"
+            style="@style/AppTheme"
             android:textSize="17sp"/>
     </LinearLayout>
 
@@ -90,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FECHA NACIMIENTO"
-            android:textColor="@android:color/black"
+            style="@style/AppTheme"
             android:textSize="14sp"/>
     </LinearLayout>
 </LinearLayout>

@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <!-- Dark Text Color for Light Background -->
+    <color name="textLightPrimary">#000000</color> <!--DE for %87 opacity-->
+
+
+    <!-- White Text Color for Dark Background -->
+    <color name="textDarkPrimary">#FFFFFF</color> <!--%100 opacity-->
+
 </resources>

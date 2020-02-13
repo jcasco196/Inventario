@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:text="Nombre:"
-            android:textColor="@android:color/black" />
+            style="@style/AppTheme"/>
     </LinearLayout>
 
     <LinearLayout
@@ -46,6 +46,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
+            android:textColor="@android:color/black"
             android:background="@drawable/bordes"
             android:paddingLeft="5dp"/>
 
@@ -61,7 +62,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="15dp"
             android:text="Email:"
-            android:textColor="@android:color/black" />
+            style="@style/AppTheme"/>
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +76,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
+            android:textColor="@android:color/black"
             android:background="@drawable/bordes"
             android:paddingLeft="5dp"/>
 
@@ -90,7 +92,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="15dp"
             android:text="Fecha de Nacimiento:"
-            android:textColor="@android:color/black" />
+            style="@style/AppTheme"/>
     </LinearLayout>
 
     <LinearLayout

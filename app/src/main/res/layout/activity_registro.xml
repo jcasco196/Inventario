@@ -61,6 +61,7 @@ android:orientation="vertical">
             android:layout_margin="15dp"
             android:paddingLeft="8dp"
             android:hint="Fecha"
+            android:textColorHint="#808080"
             android:paddingTop="15dp"
             android:textSize="17sp"
             android:textColor="@android:color/black" />
@@ -132,7 +133,7 @@ android:orientation="vertical">
             android:layout_margin="15dp"
             android:text="Ya se ha registrado? ¡Entre!"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
+            style="@style/AppTheme"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
