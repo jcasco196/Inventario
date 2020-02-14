@@ -45,7 +45,7 @@ public class Perfil extends AppCompatActivity{
 
     private Button editarPerfil;
     private Button cerrarSesion;
-    private Button ajustes;
+    private Button ajustes, inventarios;
     private ImageView imagenPerfil;
     private TextView nombre;
     private TextView email;
@@ -68,7 +68,17 @@ public class Perfil extends AppCompatActivity{
         cerrarSesion = findViewById(R.id.cerrarSesion);
         editarPerfil = findViewById(R.id.editarPerfil);
         ajustes = findViewById(R.id.ajustes);
+        inventarios = findViewById(R.id.inventarios);
+
         builder = new AlertDialog.Builder(this);
+
+
+        inventarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Perfil.this, MisInventarios.class));
+            }
+        });
 
         mDatabase.child("imagenPerfil").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
