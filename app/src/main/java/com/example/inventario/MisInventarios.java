@@ -63,7 +63,10 @@ public class MisInventarios extends AppCompatActivity {
                             .load(inventarios.photoInventariosUrl)
                             .into(holder.image);
                 }else{
-                    holder.image.setVisibility(View.GONE);
+                    Glide.with(MisInventarios.this)
+                            .load(R.drawable.almacen)
+                            .into(holder.image);
+                    //holder.image.setVisibility(View.GONE);
                 }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +91,7 @@ public class MisInventarios extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int id) {
                                         String postKey = getRef(position).getKey();
                                         mDatabase.child(postKey).setValue(null);
+
                                         //Falta que no pete cuando se elimina el ultimo item.
                                     }
                                 });

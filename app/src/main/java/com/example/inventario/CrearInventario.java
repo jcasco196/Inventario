@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 public class CrearInventario extends AppCompatActivity {
 
@@ -65,9 +67,26 @@ public class CrearInventario extends AppCompatActivity {
 
 
 
+
+
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(TextUtils.isEmpty(nombreInventario.getText().toString().trim())){
+                    Toast.makeText(CrearInventario.this,"Porfavor ponga un nombre de Inventario", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(fechaCreacion.getText().toString().trim())){
+                    Toast.makeText(CrearInventario.this,"Porfavor ponga una fecha de creación de Inventario", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(descripcion.getText().toString().trim())){
+                    Toast.makeText(CrearInventario.this,"Porfavor ponga una descripción del Inventario", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 final ProgressDialog progressDialog = new ProgressDialog(CrearInventario.this);
                 progressDialog.setIcon(R.mipmap.ic_launcher);
                 progressDialog.setMessage("Cargando...");
@@ -92,7 +111,7 @@ public class CrearInventario extends AppCompatActivity {
     }
 
     void uploadFile(){
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("Inventarios/" + nombreInventario.getText());
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("Inventarios/" +  UUID.randomUUID() + nombreInventario.getText());
         fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -101,6 +120,8 @@ public class CrearInventario extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void crearInventario() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
