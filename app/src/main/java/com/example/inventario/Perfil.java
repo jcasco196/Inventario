@@ -77,6 +77,7 @@ public class Perfil extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Perfil.this, MisInventarios.class));
+                finish();
             }
         });
 

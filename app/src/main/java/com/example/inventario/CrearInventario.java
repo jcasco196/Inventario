@@ -98,6 +98,8 @@ public class CrearInventario extends AppCompatActivity {
                     crearInventario();
                 }
                 finish();
+                //onRestart();
+                //onDestroy();
                 startActivity(new Intent(CrearInventario.this, MisInventarios.class));
             }
         });

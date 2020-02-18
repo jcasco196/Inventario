@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CrearInventario"></activity>
-        <activity android:name=".MisInventarios" />
+        <activity android:name=".MisInventarios" android:parentActivityName=".Perfil" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

@@ -122,14 +122,20 @@
         <EditText
             android:id="@+id/descripcion"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
+            android:lines="10"
+            android:paddingTop="5dp"
+            android:textSize="16sp"
+            android:minLines="5"
+            android:maxLines="15"
+            android:gravity="top|left"
             android:background="@drawable/bordes"
-            android:windowSoftInputMode="stateVisible|adjustResize"
             android:paddingLeft="5dp"
-            android:textColor="@android:color/black" />
+            style="@style/AppTheme"/>
+
 
     </LinearLayout>
 
