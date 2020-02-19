@@ -2,9 +2,11 @@ package com.example.inventario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -98,8 +100,6 @@ public class CrearInventario extends AppCompatActivity {
                     crearInventario();
                 }
                 finish();
-                //onRestart();
-                //onDestroy();
                 startActivity(new Intent(CrearInventario.this, MisInventarios.class));
             }
         });
@@ -175,5 +175,11 @@ public class CrearInventario extends AppCompatActivity {
                 Glide.with(this).load(mediaUri).into(imagenInventario);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CrearInventario.this, MisInventarios.class));
+        finish();
     }
 }
