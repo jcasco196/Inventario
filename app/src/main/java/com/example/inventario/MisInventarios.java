@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MisInventarios extends AppCompatActivity {
 
-    private Button add;
+
     private FirebaseRecyclerAdapter mAdapter;
     int RC_IMAGE_PICK = 5677;
     private DatabaseReference mDatabase;
@@ -49,10 +51,16 @@ public class MisInventarios extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_inventarios);
 
+        FloatingActionButton floatingActionButton=findViewById(R.id.add);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MisInventarios.this, CrearInventario.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-
-
-        add = findViewById(R.id.add);
 
         idInventario = getIntent().getStringExtra("INVENTARIO_KEY");
         final String uid = FirebaseAuth.getInstance().getUid();
@@ -158,12 +166,5 @@ public class MisInventarios extends AppCompatActivity {
         startActivityForResult(myIntent, 0);
         return true;
     }
-
-    public void add(View view) {
-        Intent intent = new Intent(this, CrearInventario.class);
-        startActivity(intent);
-        finish();
-    }
-
 }
 
