@@ -125,6 +125,7 @@ public class Perfil extends AppCompatActivity{
 
                 Intent i = new Intent(Perfil.this, EditarPerfil.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -136,7 +137,9 @@ public class Perfil extends AppCompatActivity{
                         .setCancelable(false)
                         .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                signOut();
+                                //signOut();
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(Perfil.this, MainActivity.class));
                                 finish();
                             }
                         })
@@ -157,25 +160,15 @@ public class Perfil extends AppCompatActivity{
         });
 
 
-
         ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startActivity(new Intent(Perfil.this, SettingsActivity.class));
+                finish();
             }
         });
 
 
     } // FIN ONCREATE
-
-    public void signOut() {
-        // [START auth_sign_out]
-        FirebaseAuth.getInstance().signOut();
-        // [END auth_sign_out]
-        finish();
-        startActivity(new Intent(Perfil.this, MainActivity.class));
-
-    }
-
 }

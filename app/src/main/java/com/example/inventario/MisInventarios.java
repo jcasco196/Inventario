@@ -164,7 +164,9 @@ public class MisInventarios extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), Perfil.class);
         startActivityForResult(myIntent, 0);
+        finish();
         return true;
+
     }
 }
 

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -229,4 +230,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialog.show();
 
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("¿Desea cerrar la aplicación?")
+                .setCancelable(false)
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.super.onBackPressed();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+
 }
