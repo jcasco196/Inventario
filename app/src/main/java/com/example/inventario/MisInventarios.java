@@ -97,7 +97,7 @@ public class MisInventarios extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(MisInventarios.this, Perfil.class); // LO ENVIO AL PERFIL PARA HACER LA PRUEBA
+                        Intent intent = new Intent(MisInventarios.this, InventarioEscogidoItem.class);
                         intent.putExtra("INVENTARIO_KEY", getRef(position).getKey());
                         startActivity(intent);
                     }
