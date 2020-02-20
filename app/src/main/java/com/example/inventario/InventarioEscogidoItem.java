@@ -30,7 +30,7 @@ public class InventarioEscogidoItem extends AppCompatActivity {
     String idInventario;
     private DatabaseReference mDatabase;
 //    private FirebaseRecyclerAdapter mAdapter;
-//    final Context context = this;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

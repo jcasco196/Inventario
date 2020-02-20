@@ -67,10 +67,6 @@ public class CrearInventario extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         final String uid = FirebaseAuth.getInstance().getUid();
 
-
-
-
-
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

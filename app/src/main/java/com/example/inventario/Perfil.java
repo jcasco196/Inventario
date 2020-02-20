@@ -72,7 +72,6 @@ public class Perfil extends AppCompatActivity{
 
         builder = new AlertDialog.Builder(this);
 
-
         inventarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

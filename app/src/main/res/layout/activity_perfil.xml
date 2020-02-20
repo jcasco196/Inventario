@@ -7,34 +7,36 @@
     tools:context=".Perfil"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="20dp">
 
         <Button
             android:id="@+id/cerrarSesion"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/cerrar_sesion"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="100dp" />
+            android:layout_marginLeft="25dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/cerrar_sesion"/>
 
         <Button
             android:id="@+id/ajustes"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/ajustes"/>
 
         <Button
             android:id="@+id/editarPerfil"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
             android:background="@drawable/editar"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
