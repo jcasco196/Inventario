@@ -80,8 +80,12 @@ public class CrearInventario extends AppCompatActivity {
                     return;
                 }
 
-                if(TextUtils.isEmpty(descripcion.getText().toString().trim())){
+                if(TextUtils.isEmpty(descripcion.getText().toString())){
                     Toast.makeText(CrearInventario.this,"Porfavor ponga una descripción del Inventario", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(descripcion.getText().toString())  || descripcion.getText().toString().length() < 30 || descripcion.getText().toString().length() > 70){
+                    descripcion.setError("La descripción ha de tener mínimo 30 carácteres y máximo 70.");
                     return;
                 }
 
