@@ -73,6 +73,8 @@
 
     </LinearLayout>
 
+<!--    https://www.viralandroid.com/2016/02/android-floating-action-menu-example.html-->
+
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/add"
         android:layout_width="wrap_content"
