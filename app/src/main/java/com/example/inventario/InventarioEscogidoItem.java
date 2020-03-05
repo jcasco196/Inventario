@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,7 @@ public class InventarioEscogidoItem extends AppCompatActivity {
     private TextView nombreInventario, fechaCreacion, descripcion;
     private ImageView image;
     String idInventario;
+    private FloatingActionMenu add;
     private DatabaseReference mDatabase;
 //    private FirebaseRecyclerAdapter mAdapter;
     final Context context = this;

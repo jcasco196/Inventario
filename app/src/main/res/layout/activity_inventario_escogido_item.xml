@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InventarioEscogidoItem">
+    tools:context=".InventarioEscogidoItem"
+    android:orientation="vertical"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
             android:layout_width="167dp"
             android:layout_height="200dp"
             android:layout_marginBottom="5dp"
-            android:src="@drawable/almacen" />
+            android:background="@drawable/almacen"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -70,4 +72,33 @@
         </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:menu_colorNormal="@color/colorAccent"
+        fab:menu_colorPressed="@color/textLightPrimary"
+        android:layout_gravity="end|bottom">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/material_design_floating_action_menu_item1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_colorNormal="@color/colorAccent"
+        android:src="@drawable/ic_add"
+        app:fab_label="Añadir Grupo"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/material_design_floating_action_menu_item2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:fab_colorNormal="@color/colorAccent"
+        app:fab_label="Añadir Artículo"
+        app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
