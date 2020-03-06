@@ -81,6 +81,7 @@
         android:layout_height="wrap_content"
         fab:menu_colorNormal="@color/colorAccent"
         fab:menu_colorPressed="@color/textLightPrimary"
+        android:layout_margin="15dp"
         android:layout_gravity="end|bottom">
 
     <com.github.clans.fab.FloatingActionButton
