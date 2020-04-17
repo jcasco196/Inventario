@@ -1,8 +1,10 @@
-package com.example.inventario;
+package jcasco.apps.inventario;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.inventario.R;
 
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -1,4 +1,4 @@
-package com.example.inventario;
+package jcasco.apps.inventario;
 
 public class Inventarios {
     public String userId;

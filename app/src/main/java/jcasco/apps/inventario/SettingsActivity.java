@@ -1,12 +1,11 @@
-package com.example.inventario;
+package jcasco.apps.inventario;
 
 import android.os.Bundle;
-import android.widget.Toast;
+
+import com.example.inventario.R;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 public class SettingsActivity extends AppCompatActivity {
 

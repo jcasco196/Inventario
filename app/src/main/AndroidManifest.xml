@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.example.inventario">
+    package="jcasco.apps.inventario">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,18 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InventarioEscogidoItem"></activity>
-        <activity android:name=".CrearInventario" />
+        <activity android:name="jcasco.apps.inventario.InventarioEscogidoItem"></activity>
+        <activity android:name="jcasco.apps.inventario.CrearInventario" />
         <activity
-            android:name=".MisInventarios"
-            android:parentActivityName=".Perfil" />
+            android:name="jcasco.apps.inventario.MisInventarios"
+            android:parentActivityName="jcasco.apps.inventario.Perfil" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="jcasco.apps.inventario.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".EditarPerfil" />
-        <activity android:name=".Perfil" />
-        <activity android:name=".Registro" />
-        <activity android:name=".MainActivity">
+        <activity android:name="jcasco.apps.inventario.EditarPerfil" />
+        <activity android:name="jcasco.apps.inventario.Perfil" />
+        <activity android:name="jcasco.apps.inventario.Registro" />
+        <activity android:name="jcasco.apps.inventario.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

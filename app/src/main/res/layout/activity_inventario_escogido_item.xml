@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InventarioEscogidoItem"
+    tools:context="jcasco.apps.inventario.InventarioEscogidoItem"
     android:orientation="vertical"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 

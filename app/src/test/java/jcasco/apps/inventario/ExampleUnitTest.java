@@ -1,4 +1,4 @@
-package com.example.inventario;
+package jcasco.apps.inventario;
 
 import org.junit.Test;
 
